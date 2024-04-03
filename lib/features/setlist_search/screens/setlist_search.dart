@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:the_helping_friendly_app/features/setlist_search/screens/setlist_full.dart';
 import 'package:the_helping_friendly_app/features/setlist_search/widgets/setlist_card_widget.dart';
@@ -33,7 +31,6 @@ class SetlistSearchPageState extends State<SetlistSearchPage> {
 
   Widget _searchTextField() {
     final RegExp dateRegex = RegExp('\\d{4}\\-\\d{2}\\-\\d{2}');
-    //add
     return TextField(
       autofocus: true,
       autocorrect: false,
@@ -56,7 +53,7 @@ class SetlistSearchPageState extends State<SetlistSearchPage> {
       ),
       onSubmitted: (String dateInput) {
         dateInput.replaceAll('/', '-');
-        log('_searchTextField datecheck: ${dateInput.contains(dateRegex)}');
+        //log('_searchTextField date-check: ${dateInput.contains(dateRegex)}');
         if (dateInput.contains(dateRegex)) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text('Searching for $dateInput setlist'),
@@ -123,10 +120,9 @@ class SetlistSearchPageState extends State<SetlistSearchPage> {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasData) {
-              //return SongList(songs: snapshot.data!.data);
               set = snapshot.data?.data as List<Song>;
-              log('setlistSearch. Set length: ${set.length}');
-              //List<Song> organizedSet = List.empty();
+
+              // Display Text stating error concerning input date
               if (set.isEmpty) {
                 return const Center(
                   child: //Column(children: <Widget>[
@@ -137,7 +133,7 @@ class SetlistSearchPageState extends State<SetlistSearchPage> {
                   ),
                 );
               }
-              //} else if (set.length > 1) {
+
               // Remove last setlist as it will be incomplete if displaying more than one show
               if (set.first.showId != set.last.showId) {
                 set = SetlistUtils.removeLastSetlist(songs: set);
@@ -146,8 +142,8 @@ class SetlistSearchPageState extends State<SetlistSearchPage> {
               // Organize all returned data into presentable form
               List<Song> organizedSet =
                   SetlistUtils.organizeShowById(songs: set);
-              //}
-              log('List<Song> set data length: ${set.length}');
+
+              //log('List<Song> set data length: ${set.length}');
               return ListView(
                 scrollDirection: Axis.vertical,
                 children: [

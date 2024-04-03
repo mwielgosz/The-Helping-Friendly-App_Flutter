@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:the_helping_friendly_app/features/setlist_search/utils/setlist_utils.dart';
 
@@ -28,8 +26,8 @@ class SetlistCardWidget extends StatelessWidget {
     Song show = set[index];
     Map<String, String> setList =
         SetlistUtils.organizeSet(set: fullResults, showId: set[index].showId);
-    log('setlistcardwidget. set length (number of cards): ${set.length}');
-    log('setlistCardWidget. show ID: ${show.showId} | set index showId: ${set[index].showId}');
+    //log('setlistcardwidget. set length (number of cards): ${set.length}');
+    //log('setlistCardWidget. show ID: ${show.showId} | set index showId: ${set[index].showId}');
 
     return Flexible(
         child: Card(

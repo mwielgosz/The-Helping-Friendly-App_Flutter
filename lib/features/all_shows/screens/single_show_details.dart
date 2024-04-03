@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:the_helping_friendly_app/features/setlist_search/services/setlist_service.dart';
 import 'package:the_helping_friendly_app/features/setlist_search/widgets/setlist_card_widget.dart';
@@ -51,7 +49,7 @@ class SingleShowDetailsPageState extends State<SingleShowDetailsPage> {
                   //return SongList(songs: snapshot.data!.data);
                   shows = snapshot.data?.data as List<Song>;
                   //log('List<Song> songs data: $songs');
-                  log('singleShowDetails. Set length: ${shows.length}');
+                  //log('singleShowDetails. Set length: ${shows.length}');
 
                   //List<Song> organizedSet = List.empty();
                   if (shows.isEmpty) {
@@ -74,7 +72,7 @@ class SingleShowDetailsPageState extends State<SingleShowDetailsPage> {
                   List<Song> organizedSet =
                       SetlistUtils.organizeShowById(songs: shows);
                   //}
-                  log('List<Song> set data length: ${shows.length}');
+                  //log('List<Song> set data length: ${shows.length}');
 
                   return SingleChildScrollView(
                     child: Row(children: [

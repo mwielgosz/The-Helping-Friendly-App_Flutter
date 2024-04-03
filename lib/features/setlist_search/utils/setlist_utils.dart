@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:html/parser.dart';
 
 import '../models/setlist_data_model.dart';
@@ -33,7 +31,7 @@ class SetlistUtils {
     if (timesRan == songsInSet.length) {
       showList.add(songs.first);
     }
-    log('organizeByShowId $timesRan. Number of shows: ${showList.length.toString()} | Songs in set: ${songsInSet.length.toString()}');
+    //log('organizeByShowId $timesRan. Number of shows: ${showList.length.toString()} | Songs in set: ${songsInSet.length.toString()}');
 
     return showList;
   }
@@ -41,21 +39,21 @@ class SetlistUtils {
   // Returns a List of Songs determined by the showId
   static getSongsByShowId({required List<Song> set, required String showId}) {
     List<Song> showSongs = [];
-    log('getSongsByShowId. set length: ${set.length}');
+    //log('getSongsByShowId. set length: ${set.length}');
 
     for (Song song in set) {
       if (song.showId == showId) {
-        log('getSongsByShowId. showId: $showId | song name: ${song.song}');
+        //log('getSongsByShowId. showId: $showId | song name: ${song.song}');
         showSongs.add(song);
       }
     }
-    log('getSongsByShowId. showSongs length: ${showSongs.length}');
+    //log('getSongsByShowId. showSongs length: ${showSongs.length}');
     return showSongs;
   }
 
   // Organizes Song model data into a Map that can be used to display Setlist information
   static organizeSet({required List<Song> set, required String showId}) {
-    log('organizeSet. set length BEFORE: ${set.length}');
+    //log('organizeSet. set length BEFORE: ${set.length}');
     Map<String, String> setList = {};
     int footnoteCount = 0;
     String lastSetName = 'Set 1: ';
@@ -89,7 +87,7 @@ class SetlistUtils {
         lastSetName = setStart;
       }
     }
-    log('organizeSet. setList length AFTER: ${setList.length}');
+    //log('organizeSet. setList length AFTER: ${setList.length}');
     return setList;
   }
 
