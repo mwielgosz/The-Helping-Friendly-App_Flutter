@@ -18,7 +18,7 @@ class TheHelpingFriendlyApp extends StatelessWidget {
         primarySwatch: primaryAppBarMaterialColor,
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(seedColor: primaryAppBarMaterialColor)
-            .copyWith(background: Colors.black),
+            .copyWith(surface: Colors.black),
       ),
       home: const TheHelpingFriendlyAppHomePage(
         title: 'The Helping Friendly App',
@@ -51,11 +51,10 @@ class _TheHelpingFriendlyAppHomePageState
       ][currentPageIndex],
       bottomNavigationBar: NavigationBarTheme(
         data: NavigationBarThemeData(
-          labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>(
-            (Set<MaterialState> states) =>
-                states.contains(MaterialState.selected)
-                    ? const TextStyle(color: primaryAppBarColor)
-                    : const TextStyle(color: Colors.white),
+          labelTextStyle: WidgetStateProperty.resolveWith<TextStyle>(
+            (Set<WidgetState> states) => states.contains(WidgetState.selected)
+                ? const TextStyle(color: primaryAppBarColor)
+                : const TextStyle(color: Colors.white),
           ),
         ),
         child: NavigationBar(
