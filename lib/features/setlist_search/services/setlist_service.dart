@@ -22,12 +22,13 @@ Future<Setlist> getSetlistByDate(String searchDate) async {
 }
 
 // Future to retrieve JSON setlist data from phish.net API and parse it into the Setlist model
-Future<Setlist> getSetlistByShowId(String showId) async {
+Future<Setlist> getSetlistByShowId(int showId) async {
   var urlSetlistSearch = '';
-  if (showId == '') {
+  if (showId == 0) {
     urlSetlistSearch = urlSetlistAll;
   } else {
-    urlSetlistSearch = urlSetlistIdSearchStart + showId + urlSetlistSearchEnd;
+    urlSetlistSearch =
+        urlSetlistIdSearchStart + showId.toString() + urlSetlistSearchEnd;
   }
   log(urlSetlistSearch);
   final urlToUri = Uri.parse(urlSetlistSearch);

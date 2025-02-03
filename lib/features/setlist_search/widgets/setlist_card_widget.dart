@@ -147,7 +147,7 @@ _setlistWidget(
 }
 
 _setlistFootnoteWidget(
-    Map<String, String> setList, String showId, bool displayFootnotes) {
+    Map<String, String> setList, int showId, bool displayFootnotes) {
   // Return empty container if no footnotes
   if (setList.isEmpty ||
       !setList.keys.contains('footnote_1') ||

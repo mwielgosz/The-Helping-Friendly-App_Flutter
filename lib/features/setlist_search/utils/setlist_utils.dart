@@ -12,7 +12,7 @@ class SetlistUtils {
   static organizeShowById({required List<Song> songs}) {
     List<Song> showList = [];
     List<Song> songsInSet = [];
-    String lastShowId = songs.first.showId;
+    int lastShowId = 0;
     int timesRan = 0;
 
     for (Song song in songs) {
@@ -37,7 +37,7 @@ class SetlistUtils {
   }
 
   // Returns a List of Songs determined by the showId
-  static getSongsByShowId({required List<Song> set, required String showId}) {
+  static getSongsByShowId({required List<Song> set, required int showId}) {
     List<Song> showSongs = [];
     //log('getSongsByShowId. set length: ${set.length}');
 
@@ -52,8 +52,9 @@ class SetlistUtils {
   }
 
   // Organizes Song model data into a Map that can be used to display Setlist information
-  static organizeSet({required List<Song> set, required String showId}) {
-    //log('organizeSet. set length BEFORE: ${set.length}');
+  static organizeSet({required List<Song> set, required int showId}) {
+    // Sort set list by unique ID so they appear in correct order
+    set.sort((a, b) => a.uniqueId.compareTo(b.uniqueId));
     Map<String, String> setList = {};
     int footnoteCount = 0;
     String lastSetName = 'Set 1: ';

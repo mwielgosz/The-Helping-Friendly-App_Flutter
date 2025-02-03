@@ -48,22 +48,22 @@ class AllShows {
 }
 
 class Show {
-  final String showID;
+  final int showID;
   final String showYear;
-  final String showMonth;
-  final String showDay;
+  final int showMonth;
+  final int showDay;
   final String showDate;
   final String permalink;
-  final String excludeFromStats;
-  final String venueId;
+  final int excludeFromStats;
+  final int venueId;
   final String setlistNotes;
   final String venue;
   final String city;
   final String state;
   final String country;
-  final String artistId;
+  final int artistId;
   final String artistName;
-  final String tourId;
+  final int tourId;
   final String tourName;
   final String createdAt;
   final String updatedAt;
@@ -91,22 +91,22 @@ class Show {
 
   factory Show.fromJson(Map<String, dynamic> json) {
     return Show(
-      showID: json['showid'] as String,
+      showID: json['showid'] as int,
       showYear: json['showyear'] as String,
-      showMonth: json['showmonth'] as String,
-      showDay: json['showday'] as String,
+      showMonth: json['showmonth'] as int,
+      showDay: json['showday'] as int,
       showDate: json['showdate'] as String,
       permalink: json['permalink'] as String,
-      excludeFromStats: json['exclude_from_stats'] as String,
-      venueId: json['venueid'] as String,
+      excludeFromStats: json['exclude_from_stats'] as int,
+      venueId: json['venueid'] as int,
       setlistNotes: json['setlist_notes'] as String,
       venue: json['venue'] as String,
       city: json['city'] as String,
       state: json['state'] as String,
       country: json['country'] as String,
-      artistId: json['artistid'] as String,
+      artistId: json['artistid'] as int,
       artistName: json['artist_name'] as String,
-      tourId: json['tourid'] as String,
+      tourId: json['tourid'] as int,
       tourName: json['tour_name'] as String,
       createdAt: json['created_at']! as String,
       updatedAt: json['updated_at']! as String,

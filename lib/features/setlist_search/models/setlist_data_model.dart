@@ -48,41 +48,41 @@ class Setlist {
 }
 
 class Song {
-  String showId;
+  int showId;
   String showDate;
   String permalink;
   String showYear;
-  String uniqueId;
+  int uniqueId;
   String meta;
-  String reviews;
-  String exclude;
+  int reviews;
+  int exclude;
   String setlistNotes;
   String soundcheck;
-  String songId;
-  String position;
-  String transition;
+  int songId;
+  int position;
+  int transition;
   String footnote;
   String set;
-  String isJam;
-  String isReprise;
-  String isJamChart;
+  int isJam;
+  int isReprise;
+  int isJamChart;
   String jamChartDescription;
   String trackTime;
-  String gap;
-  String tourId;
+  int gap;
+  int tourId;
   String tourName;
   String tourWhen;
   String song;
   String nickname;
   String slug;
-  String isOriginal;
-  String venueId;
+  int isOriginal;
+  int venueId;
   String venue;
   String city;
   String state;
   String country;
   String transMark;
-  String artistId;
+  int artistId;
   String artistSlug;
   String artistName;
 

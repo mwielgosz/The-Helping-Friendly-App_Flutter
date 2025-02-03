@@ -15,7 +15,7 @@ class SingleShowDetailsPage extends StatefulWidget {
   const SingleShowDetailsPage(
       {super.key, required this.label, required this.showId});
   final String label;
-  final String showId;
+  final int showId;
 
   @override
   State<StatefulWidget> createState() => SingleShowDetailsPageState();
