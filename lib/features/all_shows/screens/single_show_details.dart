@@ -14,6 +14,7 @@ import '../../setlist_search/utils/setlist_utils.dart';
 class SingleShowDetailsPage extends StatefulWidget {
   const SingleShowDetailsPage(
       {super.key, required this.label, required this.showId});
+
   final String label;
   final int showId;
 
@@ -36,7 +37,7 @@ class SingleShowDetailsPageState extends State<SingleShowDetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Date: ${widget.label}'),
+          title: Text(widget.label),
           iconTheme: const IconThemeData(color: Colors.white),
           titleTextStyle: const TextStyle(color: Colors.white, fontSize: 22),
           backgroundColor: primaryAppBarMaterialColor,
@@ -46,23 +47,20 @@ class SingleShowDetailsPageState extends State<SingleShowDetailsPage> {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 if (snapshot.hasData && snapshot.data != null) {
-                  //return SongList(songs: snapshot.data!.data);
                   shows = snapshot.data?.data as List<Song>;
-                  //log('List<Song> songs data: $songs');
                   //log('singleShowDetails. Set length: ${shows.length}');
 
-                  //List<Song> organizedSet = List.empty();
                   if (shows.isEmpty) {
                     return const Center(
                       child: //Column(children: <Widget>[
                           Text(
-                        'This show has in the future, so no data is available yet!',
+                        'This show is in the future, so no data is available yet!',
                         textAlign: TextAlign.center,
                         style: TextStyle(color: Colors.white),
                       ),
                     );
                   }
-                  //} else if (set.length > 1) {
+
                   // Remove last setlist as it will be incomplete if displaying more than one show
                   if (shows.first.showId != shows.last.showId) {
                     shows = SetlistUtils.removeLastSetlist(songs: shows);
@@ -71,7 +69,6 @@ class SingleShowDetailsPageState extends State<SingleShowDetailsPage> {
                   // Organize all returned data into presentable form
                   List<Song> organizedSet =
                       SetlistUtils.organizeShowById(songs: shows);
-                  //}
                   //log('List<Song> set data length: ${shows.length}');
 
                   return SingleChildScrollView(
@@ -95,8 +92,16 @@ class SingleShowDetailsPageState extends State<SingleShowDetailsPage> {
               return Center(
                 child: Column(
                   children: <Widget>[
-                    const Text('Something is missing!'),
-                    Text('Error: ${snapshot.error.toString()}'),
+                    const Text(
+                      'Something is missing!',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    Text(
+                      'Error: ${snapshot.error.toString()}',
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(color: Colors.white),
+                    ),
                   ],
                 ),
               );

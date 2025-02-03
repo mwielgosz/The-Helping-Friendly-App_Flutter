@@ -13,6 +13,7 @@ import '../../../constants/constants.dart';
 
 class AllShowsPage extends StatefulWidget {
   const AllShowsPage({super.key, required this.label});
+
   final String label;
 
   @override
@@ -45,7 +46,17 @@ class AllShowsPageState extends State<AllShowsPage> {
                 if (snapshot.hasData && snapshot.data != null) {
                   //return SongList(songs: snapshot.data!.data);
                   shows = snapshot.data?.data as List<Show>;
+
+                  // Do not display any shows that are in the future
+                  DateTime now = DateTime.now();
+                  shows.removeWhere((shows) => DateTime(
+                          int.parse(shows.showYear),
+                          shows.showMonth,
+                          shows.showDay)
+                      .isAfter(DateTime(now.year, now.month, now.day)));
+
                   //log('List<Song> songs data: $songs');
+
                   return ListView(
                     scrollDirection: Axis.vertical,
                     children: [
@@ -60,7 +71,8 @@ class AllShowsPageState extends State<AllShowsPage> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => SingleShowDetailsPage(
-                                      label: shows[index].showDate,
+                                      label:
+                                          '${shows[index].artistName}: ${shows[index].showDate}',
                                       showId: shows[index].showID),
                                   // Pass the arguments as part of the RouteSettings. The
                                   // DetailScreen reads the arguments from these settings.
@@ -74,19 +86,13 @@ class AllShowsPageState extends State<AllShowsPage> {
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                ShowCardWidget(show: shows[index]) //),
-                              ],
+                              children: [ShowCardWidget(show: shows[index])],
                             ),
                           );
                         },
                       )
                     ],
                   );
-
-                  //const Column(children: <Widget>[
-                  //SetlistCardWidget(set: shows)
-                  //],
                 } else if (snapshot.hasError) {
                   return const Center(
                     child: //Column(children: <Widget>[

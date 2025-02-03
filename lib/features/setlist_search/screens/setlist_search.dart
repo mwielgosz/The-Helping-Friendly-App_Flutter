@@ -35,7 +35,7 @@ class SetlistSearchPageState extends State<SetlistSearchPage> {
       autofocus: true,
       autocorrect: false,
       style: const TextStyle(
-          fontSize: 18, color: Colors.black, backgroundColor: Colors.white),
+          fontSize: 16, color: Colors.black, backgroundColor: Colors.white),
       keyboardType: TextInputType.datetime,
       decoration: InputDecoration(
         fillColor: Colors.white,
@@ -44,8 +44,8 @@ class SetlistSearchPageState extends State<SetlistSearchPage> {
           borderSide: BorderSide.none,
           borderRadius: BorderRadius.circular(32),
         ),
-        hintStyle: const TextStyle(fontSize: 18, color: Colors.grey),
-        hintText: 'Setlist search (2023-12-31)',
+        hintStyle: const TextStyle(fontSize: 16, color: Colors.grey),
+        hintText: 'Setlist search (2024-12-31)',
         hintFadeDuration: const Duration(milliseconds: 250),
         //suffixIcon: const Icon(Icons.search),
         //suffixIconColor: primaryAppBarColor,
@@ -53,7 +53,6 @@ class SetlistSearchPageState extends State<SetlistSearchPage> {
       ),
       onSubmitted: (String dateInput) {
         dateInput.replaceAll('/', '-');
-        //log('_searchTextField date-check: ${dateInput.contains(dateRegex)}');
         if (dateInput.contains(dateRegex)) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text('Searching for $dateInput setlist'),
@@ -153,8 +152,6 @@ class SetlistSearchPageState extends State<SetlistSearchPage> {
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       return GestureDetector(
-                        //onTap: _fullSetlistCard(
-                        //    organizedSet, index, fullResults, true),
                         onTap: () {
                           Navigator.push(
                             context,

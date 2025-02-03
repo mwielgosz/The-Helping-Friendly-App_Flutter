@@ -17,25 +17,22 @@ class ShowCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Flexible(
       child: Card(
-        elevation: 0.0,
+        elevation: 4.0,
         child: Container(
           padding: const EdgeInsets.all(8.0),
-          //height: 250,
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(10)),
             color: Colors.black87,
             border: Border.all(
-              color: Colors.transparent,
+              color: Colors.white,
             ),
           ),
-
           child: Column(
             children: <Widget>[
-              // Row(children: <Widget>[
               Align(
                 alignment: Alignment.center,
                 child: Text(
-                  '${show.artistName} ${show.showDate}',
+                  '${show.artistName} - ${show.showDate}',
                   style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w600,
@@ -49,6 +46,7 @@ class ShowCardWidget extends StatelessWidget {
                 children: [
                   Text(
                     show.venue,
+                    textAlign: TextAlign.center,
                     style: const TextStyle(fontSize: 16.0, color: Colors.grey),
                   ),
                   if (show.country == 'USA') ...{
@@ -70,29 +68,12 @@ class ShowCardWidget extends StatelessWidget {
               ),
               if (show.setlistNotes != '') ...{
                 Container(
-                  alignment: Alignment.centerLeft,
+                  alignment: Alignment.center,
                   padding: const EdgeInsets.only(left: 8.0),
-                  child: RichText(
-                    text: TextSpan(
-                      // Note: Styles for TextSpans must be explicitly defined.
-                      // Child text spans will inherit styles from parent
-                      style: const TextStyle(
-                        fontSize: 14.0,
-                        height: 1.5,
-                        color: Colors.white,
-                      ),
-                      children: <TextSpan>[
-                        const TextSpan(
-                            text: 'Notes:',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold)),
-                        TextSpan(
-                            text:
-                                '\n${SetlistUtils.parseHtmlToString(html: show.setlistNotes)}',
-                            style: const TextStyle(color: Colors.grey)),
-                      ],
-                    ),
+                  child: Text(
+                    '\n${SetlistUtils.parseHtmlToString(htmlStr: show.setlistNotes)}',
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontSize: 14.0, color: Colors.grey),
                   ),
                 ),
               },

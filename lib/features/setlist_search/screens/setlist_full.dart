@@ -27,7 +27,8 @@ class SetlistFullPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
-        title: Text('Setlist: ${organizedSet.first.showDate}'),
+        title: Text(
+            '${organizedSet[index].artistName}: ${organizedSet[index].showDate}'),
         titleTextStyle: const TextStyle(color: Colors.white, fontSize: 22),
         backgroundColor: primaryAppBarMaterialColor,
       ),
@@ -37,7 +38,6 @@ class SetlistFullPage extends StatelessWidget {
             SetlistCardWidget(
               set: organizedSet,
               index: index,
-              //showId: set[index].showId,
               fullResults: fullResults,
               displayFootnotes: true,
             ),

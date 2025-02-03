@@ -28,10 +28,11 @@ class SetlistCardWidget extends StatelessWidget {
         SetlistUtils.organizeSet(set: fullResults, showId: set[index].showId);
     //log('setlistcardwidget. set length (number of cards): ${set.length}');
     //log('setlistCardWidget. show ID: ${show.showId} | set index showId: ${set[index].showId}');
+    //log('setlistCardWidget. show date: ${show.showDate}');
 
     return Flexible(
         child: Card(
-      elevation: 0.0,
+      elevation: 4.0,
       child: Container(
         padding: const EdgeInsets.all(8.0),
         //height: 250,
@@ -39,7 +40,7 @@ class SetlistCardWidget extends StatelessWidget {
           borderRadius: const BorderRadius.all(Radius.circular(10)),
           color: Colors.black87,
           border: Border.all(
-            color: Colors.transparent,
+            color: Colors.white,
           ),
         ),
 
@@ -59,21 +60,25 @@ class SetlistCardWidget extends StatelessWidget {
             ),
             Row(
               children: <Widget>[
-                Column(
-                  children: <Widget>[
-                    Text(
-                      show.venue,
-                      style:
-                          const TextStyle(fontSize: 16.0, color: Colors.grey),
-                    ),
-                  ],
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      Text(
+                        show.venue,
+                        style:
+                            const TextStyle(fontSize: 16.0, color: Colors.grey),
+                      ),
+                    ],
+                  ),
                 ),
                 Expanded(
                   child: Container(
                     padding: const EdgeInsets.only(left: 8.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         if (show.country == 'USA') ...{
                           Text(
@@ -96,9 +101,15 @@ class SetlistCardWidget extends StatelessWidget {
                 )
               ],
             ),
+
+            // Add soundcheck
+            _soundcheckWidget(set[index]),
+            // Add setlist
             _setlistWidget(setList, set[index].showId, displayFootnotes),
+            // Add footnotes
             _setlistFootnoteWidget(
                 setList, set[index].showId, displayFootnotes),
+            // Add set notes
             _setlistNotesWidget(show, displayFootnotes),
           ],
         ),
@@ -107,15 +118,41 @@ class SetlistCardWidget extends StatelessWidget {
   }
 }
 
-_setlistWidget(
-    Map<String, String> setList, String showId, bool displayFootnotes) {
+_soundcheckWidget(Song song) {
+  if (song.soundcheck.isEmpty) {
+    // Return empty container if no soundcheck
+    return Container();
+  }
   return Container(
     alignment: Alignment.centerLeft,
     padding: const EdgeInsets.only(left: 8.0),
     child: RichText(
       text: TextSpan(
-        // Note: Styles for TextSpans must be explicitly defined.
-        // Child text spans will inherit styles from parent
+        style: const TextStyle(
+          fontSize: 14.0,
+          height: 1.5,
+          color: Colors.white,
+        ),
+        children: <TextSpan>[
+          const TextSpan(
+              text: "Soundcheck: ",
+              style:
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+          TextSpan(
+              text: song.soundcheck,
+              style: const TextStyle(color: Colors.white)),
+        ],
+      ),
+    ),
+  );
+}
+
+_setlistWidget(Map<String, String> setList, int showId, bool displayFootnotes) {
+  return Container(
+    alignment: Alignment.centerLeft,
+    padding: const EdgeInsets.only(left: 8.0),
+    child: RichText(
+      text: TextSpan(
         style: const TextStyle(
           fontSize: 14.0,
           height: 1.5,
@@ -211,7 +248,7 @@ _setlistNotesWidget(Song show, bool displayFootnotes) {
                   TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
           TextSpan(
               text:
-                  '\n${SetlistUtils.parseHtmlToString(html: show.setlistNotes)}',
+                  '\n${SetlistUtils.parseHtmlToString(htmlStr: show.setlistNotes)}',
               style: const TextStyle(color: Colors.white)),
         ],
       ),

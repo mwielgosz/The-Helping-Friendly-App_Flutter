@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:http/http.dart' as http;
 import 'package:the_helping_friendly_app/constants/constants.dart';
@@ -14,7 +13,7 @@ Future<Setlist> getSetlistByDate(String searchDate) async {
   } else {
     urlSetlistSearch = urlSetlistSearchStart + searchDate + urlSetlistSearchEnd;
   }
-  log(urlSetlistSearch);
+  //log('Setlist url (date): $urlSetlistSearch');
   final urlToUri = Uri.parse(urlSetlistSearch);
   final response = await http.get(urlToUri);
   //log(response.body);
@@ -30,7 +29,7 @@ Future<Setlist> getSetlistByShowId(int showId) async {
     urlSetlistSearch =
         urlSetlistIdSearchStart + showId.toString() + urlSetlistSearchEnd;
   }
-  log(urlSetlistSearch);
+  //log('Setlist url (showId): $urlSetlistSearch');
   final urlToUri = Uri.parse(urlSetlistSearch);
   final response = await http.get(urlToUri);
   //log(response.body);

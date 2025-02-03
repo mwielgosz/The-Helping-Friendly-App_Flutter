@@ -64,18 +64,18 @@ class SetlistUtils {
 
         if (song.set == 'e') {
           setStart = 'Encore: ';
-        } else if (song.footnote != '') {
+        } else if (song.footnote != '' && song.song != song.footnote) {
           footnoteCount++;
         }
         if (lastSetName != setStart) setStart = '\n${setStart.toString()}';
         if (setList[setStart] == null) {
-          if (song.footnote != '') {
+          if (song.footnote != '' && song.song != song.footnote) {
             setList[setStart] = '${song.song}[$footnoteCount]${song.transMark}';
           } else {
             setList[setStart] = '${song.song}${song.transMark}';
           }
         } else {
-          if (song.footnote != '') {
+          if (song.footnote != '' && song.song != song.footnote) {
             setList[setStart] =
                 '${setList[setStart].toString()}${song.song}[$footnoteCount] ${song.transMark}';
             setList['footnote_count_$footnoteCount'] = '\n[$footnoteCount]';
@@ -107,10 +107,12 @@ class SetlistUtils {
   }
 
   // Parses HTML to basic string removing HTML tags found in some JSON returns
-  static parseHtmlToString({required String html}) {
-    html = html.replaceAll('&nbsp;', ' ');
-    html = html.replaceAll(RegExp('<(.*?)>'), '"');
-    var parsed = parse(html);
-    return parsed.body?.innerHtml;
+  static parseHtmlToString({required String htmlStr}) {
+    htmlStr = htmlStr.replaceAll('&nbsp;', ' ');
+    htmlStr = htmlStr.replaceAll(RegExp('<(.*?)>'), '');
+    final document = parse(htmlStr);
+    String? parsedString = parse(document.body?.text).documentElement?.text;
+    parsedString = parsedString?.trim().replaceAll(RegExp(r'(\n){3,}'), "\n\n");
+    return parsedString;
   }
 }
