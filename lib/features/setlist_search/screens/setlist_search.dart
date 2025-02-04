@@ -88,6 +88,7 @@ class SetlistSearchPageState extends State<SetlistSearchPage> {
           title: !_searchMode ? Text(widget.label) : _searchTextField(),
           titleTextStyle: const TextStyle(color: Colors.white, fontSize: 22),
           backgroundColor: primaryAppBarMaterialColor,
+          leading: Image(image: AssetImage("assets/icon/launcher.png")),
           actions: !_searchMode
               ? [
                   IconButton(

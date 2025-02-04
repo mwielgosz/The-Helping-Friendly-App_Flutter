@@ -35,10 +35,10 @@ class AllShowsPageState extends State<AllShowsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('All Shows'),
-          titleTextStyle: const TextStyle(color: Colors.white, fontSize: 22),
-          backgroundColor: primaryAppBarMaterialColor,
-        ),
+            title: const Text('All Shows'),
+            titleTextStyle: const TextStyle(color: Colors.white, fontSize: 22),
+            backgroundColor: primaryAppBarMaterialColor,
+            leading: Image(image: AssetImage("assets/icon/launcher.png"))),
         body: FutureBuilder<AllShows>(
             future: getAllShows(),
             builder: (context, snapshot) {
