@@ -12,7 +12,7 @@ class TheHelpingFriendlyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: true,
       theme: ThemeData(
         //appBarTheme: appBarTheme(this)
         primarySwatch: primaryAppBarMaterialColor,
@@ -39,7 +39,7 @@ class TheHelpingFriendlyAppHomePage extends StatefulWidget {
 
 class _TheHelpingFriendlyAppHomePageState
     extends State<TheHelpingFriendlyAppHomePage> {
-  int currentPageIndex = 0;
+  int _selectedPageIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,7 @@ class _TheHelpingFriendlyAppHomePageState
       body: <Widget>[
         const AllShowsPage(label: 'All Shows'),
         const SetlistSearchPage(label: 'Setlist Search'),
-      ][currentPageIndex],
+      ][_selectedPageIndex],
       bottomNavigationBar: NavigationBarTheme(
         data: NavigationBarThemeData(
           labelTextStyle: WidgetStateProperty.resolveWith<TextStyle>(
@@ -60,21 +60,21 @@ class _TheHelpingFriendlyAppHomePageState
         child: NavigationBar(
           onDestinationSelected: (int index) {
             setState(() {
-              currentPageIndex = index;
+              _selectedPageIndex = index;
             });
           },
           backgroundColor: Colors.black,
           indicatorColor: primaryAppBarMaterialColor,
-          selectedIndex: currentPageIndex,
+          selectedIndex: _selectedPageIndex,
           destinations: const <Widget>[
             NavigationDestination(
-              selectedIcon: Icon(Icons.home_outlined, color: Colors.white),
-              icon: Icon(Icons.home_sharp, color: Colors.white),
+              selectedIcon: Icon(Icons.home, color: Colors.white),
+              icon: Icon(Icons.home_outlined, color: Colors.white),
               label: 'All Shows',
             ),
             NavigationDestination(
-              selectedIcon: Icon(Icons.search_outlined, color: Colors.white),
-              icon: Icon(Icons.search_sharp, color: Colors.white),
+              selectedIcon: Icon(Icons.search, color: Colors.white),
+              icon: Icon(Icons.search_outlined, color: Colors.white),
               label: 'Setlist Search',
             ),
           ],
