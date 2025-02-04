@@ -37,7 +37,7 @@ class SetlistUtils {
   }
 
   // Returns a List of Songs determined by the showId
-  static getSongsByShowId({required List<Song> set, required int showId}) {
+  /*static getSongsByShowId({required List<Song> set, required int showId}) {
     List<Song> showSongs = [];
     //log('getSongsByShowId. set length: ${set.length}');
 
@@ -49,37 +49,54 @@ class SetlistUtils {
     }
     //log('getSongsByShowId. showSongs length: ${showSongs.length}');
     return showSongs;
-  }
+  }*/
 
   // Organizes Song model data into a Map that can be used to display Setlist information
   static organizeSet({required List<Song> set, required int showId}) {
     // Sort set list by unique ID so they appear in correct order
     set.sort((a, b) => a.uniqueId.compareTo(b.uniqueId));
     Map<String, String> setList = {};
-    int footnoteCount = 0;
+    List<String> footers = [];
     String lastSetName = 'Set 1: ';
+
+    // Get unique footer notes
+    for (Song song in set) {
+      if (song.footnote != '' &&
+          song.song != song.footnote &&
+          !footers.contains(song.footnote)) {
+        footers.add(song.footnote);
+      }
+    }
+
+    // Map keys & values for sets/songs & footer notes
     for (Song song in set) {
       if (song.showId == showId) {
         String setStart = 'Set ${song.set}: ';
 
         if (song.set == 'e') {
           setStart = 'Encore: ';
-        } else if (song.footnote != '' && song.song != song.footnote) {
-          footnoteCount++;
         }
         if (lastSetName != setStart) setStart = '\n${setStart.toString()}';
         if (setList[setStart] == null) {
           if (song.footnote != '' && song.song != song.footnote) {
-            setList[setStart] = '${song.song}[$footnoteCount]${song.transMark}';
+            if (footers.contains(song.footnote)) {
+              int footerIdx = footers.indexOf(song.footnote) + 1;
+              setList[setStart] = '${song.song}[$footerIdx]${song.transMark}';
+              setList['footnote_count_$footerIdx'] = '\n[$footerIdx]';
+              setList['footnote_$footerIdx'] = ' ${song.footnote}';
+            }
           } else {
             setList[setStart] = '${song.song}${song.transMark}';
           }
         } else {
           if (song.footnote != '' && song.song != song.footnote) {
-            setList[setStart] =
-                '${setList[setStart].toString()}${song.song}[$footnoteCount] ${song.transMark}';
-            setList['footnote_count_$footnoteCount'] = '\n[$footnoteCount]';
-            setList['footnote_$footnoteCount'] = ' ${song.footnote}';
+            if (footers.contains(song.footnote)) {
+              int footerIdx = footers.indexOf(song.footnote) + 1;
+              setList[setStart] =
+                  '${setList[setStart].toString()}${song.song}[$footerIdx]${song.transMark}';
+              setList['footnote_count_$footerIdx'] = '\n[$footerIdx]';
+              setList['footnote_$footerIdx'] = ' ${song.footnote}';
+            }
           } else {
             setList[setStart] =
                 '${setList[setStart].toString()}${song.song}${song.transMark}';

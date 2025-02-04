@@ -105,12 +105,11 @@ class SetlistCardWidget extends StatelessWidget {
             // Add soundcheck
             _soundcheckWidget(set[index]),
             // Add setlist
-            _setlistWidget(setList, set[index].showId, displayFootnotes),
+            _setlistWidget(setList, displayFootnotes),
             // Add footnotes
-            _setlistFootnoteWidget(
-                setList, set[index].showId, displayFootnotes),
+            _setlistFootnoteWidget(setList, displayFootnotes),
             // Add set notes
-            _setlistNotesWidget(show, displayFootnotes),
+            _setlistNotesWidget(set[index], displayFootnotes),
           ],
         ),
       ),
@@ -147,7 +146,7 @@ _soundcheckWidget(Song song) {
   );
 }
 
-_setlistWidget(Map<String, String> setList, int showId, bool displayFootnotes) {
+_setlistWidget(Map<String, String> setList, bool displayFootnotes) {
   return Container(
     alignment: Alignment.centerLeft,
     padding: const EdgeInsets.only(left: 8.0),
@@ -183,8 +182,7 @@ _setlistWidget(Map<String, String> setList, int showId, bool displayFootnotes) {
   );
 }
 
-_setlistFootnoteWidget(
-    Map<String, String> setList, int showId, bool displayFootnotes) {
+_setlistFootnoteWidget(Map<String, String> setList, bool displayFootnotes) {
   // Return empty container if no footnotes
   if (setList.isEmpty ||
       !setList.keys.contains('footnote_1') ||
@@ -197,8 +195,6 @@ _setlistFootnoteWidget(
       padding: const EdgeInsets.only(left: 8.0),
       child: RichText(
         text: TextSpan(
-          // Note: Styles for TextSpans must be explicitly defined.
-          // Child text spans will inherit styles from parent
           style: const TextStyle(
             fontSize: 14.0,
             height: 1.5,
