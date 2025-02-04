@@ -56,20 +56,23 @@ class SetlistUtils {
     // Sort set list by unique ID so they appear in correct order
     set.sort((a, b) => a.uniqueId.compareTo(b.uniqueId));
     Map<String, String> setList = {};
-    List<String> footers = [];
-    String lastSetName = 'Set 1: ';
-
-    // Get unique footer notes
-    for (Song song in set) {
-      if (song.footnote != '' &&
-          song.song != song.footnote &&
-          !footers.contains(song.footnote)) {
-        footers.add(song.footnote);
-      }
-    }
 
     // Map keys & values for sets/songs & footer notes
     for (Song song in set) {
+      List<String> footers = [];
+      String lastSetName = 'Set 1: ';
+
+      List<Song> uniqueSet = set.where((i) => i.showId == showId).toList();
+
+      // Get unique footer notes
+      for (Song song in uniqueSet) {
+        if (song.footnote != '' &&
+            song.song != song.footnote &&
+            !footers.contains(song.footnote)) {
+          footers.add(song.footnote);
+        }
+      }
+
       if (song.showId == showId) {
         String setStart = 'Set ${song.set}: ';
 
@@ -78,6 +81,7 @@ class SetlistUtils {
         }
         if (lastSetName != setStart) setStart = '\n${setStart.toString()}';
         if (setList[setStart] == null) {
+          // Add first entry for set
           if (song.footnote != '' && song.song != song.footnote) {
             if (footers.contains(song.footnote)) {
               int footerIdx = footers.indexOf(song.footnote) + 1;
@@ -89,6 +93,7 @@ class SetlistUtils {
             setList[setStart] = '${song.song}${song.transMark}';
           }
         } else {
+          // Add more entries to existing set
           if (song.footnote != '' && song.song != song.footnote) {
             if (footers.contains(song.footnote)) {
               int footerIdx = footers.indexOf(song.footnote) + 1;
