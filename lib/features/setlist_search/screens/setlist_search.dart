@@ -189,8 +189,10 @@ class SetlistSearchPageState extends State<SetlistSearchPage> {
               );
             } else if (snapshot.hasError) {
               return const Center(
-                child: //Column(children: <Widget>[
-                    Text('An error has occurred!'),
+                child: Text(
+                  'An error has occurred!',
+                  style: TextStyle(color: Colors.white),
+                ),
               );
             }
           } else {
@@ -199,8 +201,14 @@ class SetlistSearchPageState extends State<SetlistSearchPage> {
           return Center(
             child: Column(
               children: <Widget>[
-                const Text('Something is missing!'),
-                Text('Error: ${snapshot.error.toString()}'),
+                const Text(
+                  'Something is missing!',
+                  style: TextStyle(color: Colors.white),
+                ),
+                Text(
+                  'Error: ${snapshot.error.toString()}',
+                  style: TextStyle(color: Colors.white),
+                ),
               ],
             ),
           );
