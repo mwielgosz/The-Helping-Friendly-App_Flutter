@@ -17,7 +17,7 @@ Future<Setlist> getSetlistByDate(String searchDate) async {
   final urlToUri = Uri.parse(urlSetlistSearch);
   final response = await http.get(urlToUri);
   //log(response.body);
-  return postFromJson(response.body);
+  return postFromJson(response);
 }
 
 // Future to retrieve JSON setlist data from phish.net API and parse it into the Setlist model
@@ -33,5 +33,5 @@ Future<Setlist> getSetlistByShowId(int showId) async {
   final urlToUri = Uri.parse(urlSetlistSearch);
   final response = await http.get(urlToUri);
   //log(response.body);
-  return postFromJson(response.body);
+  return postFromJson(response);
 }

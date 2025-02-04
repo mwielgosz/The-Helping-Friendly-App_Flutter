@@ -2,8 +2,8 @@
 
 import 'dart:convert';
 
-AllShows postFromJson(String str) {
-  final jsonData = json.decode(str);
+AllShows postFromJson(dynamic response) {
+  final dynamic jsonData = json.decode(utf8.decode(response.bodyBytes));
   return AllShows.fromJson(jsonData);
 }
 

@@ -2,8 +2,8 @@
 
 import 'dart:convert';
 
-Setlist postFromJson(String str) {
-  final jsonData = json.decode(str);
+Setlist postFromJson(dynamic response) {
+  final dynamic jsonData = json.decode(utf8.decode(response.bodyBytes));
   return Setlist.fromJson(jsonData);
 }
 

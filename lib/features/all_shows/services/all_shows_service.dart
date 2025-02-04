@@ -12,5 +12,5 @@ Future<AllShows> getAllShows() async {
   final urlToUri = Uri.parse(urlAllShows);
   final response = await http.get(urlToUri);
   //log(response.body);
-  return postFromJson(response.body);
+  return postFromJson(response);
 }
